@@ -10,10 +10,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2  # Check out the repository code
+        uses: actions/checkout@v4  # Check out the repository code
 
       - name: Set up Python
-        uses: actions/setup-python@v2  # Set up the Python environment
+        uses: actions/setup-python@v5  # Set up the Python environment
         with:
           python-version: '3.x'  # Use Python 3.x (you can specify a version like '3.8')
 
