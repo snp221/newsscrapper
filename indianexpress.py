@@ -92,7 +92,7 @@ def save_to_gsheet(new_row):
     ]
     
     # Load the credentials.json
-    creds = Credentials.from_service_account_file('gsheet.json', scopes=SCOPES)
+    creds = Credentials.from_service_account_file('credentials.json', scopes=SCOPES)
     
     # Authorize and connect to Google Sheets
     client = gspread.authorize(creds)
