@@ -1,10 +1,8 @@
 name: Run Python Script
 
 on:
-  push:
-    branches:
-      - main  # Run this action when code is pushed to the main branch
-  workflow_dispatch:  # Allow manual trigger of the workflow from GitHub Actions
+  schedule:
+    - cron: "0 8 * * *"  # Runs daily at 8 AM UTC (which is 2 AM CST)
 
 jobs:
   run_python:
