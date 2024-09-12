@@ -78,20 +78,28 @@ def summarize_articles(articles, max_length=130, min_length=30):
 #     print(f"Summary of Article {i+1}: {summary}\n")
 
 
-import gspread
 from datetime import datetime
-from oauth2client.service_account import ServiceAccountCredentials
+import gspread
+from google.oauth2.service_account import Credentials
+
 def save_to_gsheet(new_row):
 
-    scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-    creds = ServiceAccountCredentials.from_json_keyfile_name('gsheet.json', scope)
 
-    # Step 2: Authorize and open the Google Sheet
+# Define the scope for Google Sheets API and Google Drive API
+    SCOPES = [
+        'https://www.googleapis.com/auth/spreadsheets',
+        'https://www.googleapis.com/auth/drive'
+    ]
+    
+    # Load the credentials.json
+    creds = Credentials.from_service_account_file('gsheet.json', scopes=SCOPES)
+    
+    # Authorize and connect to Google Sheets
     client = gspread.authorize(creds)
     sheet = client.open('news_summary').sheet1  # Change to your Google Sheet name
-
-    sheet.append_rows(summaries)
-    print("Rows added successfully.")
+    print(sheet.get_all_records())
+    #sheet.append_rows(summaries)
+    #print("Rows added successfully.")
 
 if __name__ == "__main__":
   summaries = summarize_articles(articles)
