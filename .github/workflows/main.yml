@@ -1,7 +1,9 @@
 name: Run Python Script
 
 on:
-  push
+  schedule:
+    # Runs at 12 AM CST every day
+    - cron: '0 6 * * *'  # 12 AM CST is 6 AM UTC
 
 jobs:
   run_python:
