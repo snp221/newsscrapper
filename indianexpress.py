@@ -97,9 +97,9 @@ def save_to_gsheet(new_row):
     # Authorize and connect to Google Sheets
     client = gspread.authorize(creds)
     sheet = client.open('news_summary').sheet1  # Change to your Google Sheet name
-    print(sheet.get_all_records())
-    #sheet.append_rows(summaries)
-    #print("Rows added successfully.")
+    #print(sheet.get_all_records())
+    sheet.append_rows(summaries)
+    print("Rows added successfully.")
 
 if __name__ == "__main__":
   summaries = summarize_articles(articles)
