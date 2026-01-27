@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36'}
 url = 'https://indianexpress.com/todays-paper/'
-articles = []
+articles = set()
 # Send a GET request to the webpage
 response = requests.get(url, headers=headers)
 soup = BeautifulSoup(response.content, 'html.parser')
@@ -11,7 +11,7 @@ divs = soup.find_all('div', class_='today-paper')
 for link in soup.find_all('a', href=True):
     href = link['href']
     if '/article/' in href:
-        articles.append(href)
+        articles.add(href)
 
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
@@ -28,7 +28,7 @@ def summarize_articles(articles, max_length=130, min_length=30):
     Summarizes a list of articles using the BART model directly.
 
     Parameters:
-        articles (list of str): List of articles to summarize.
+        articles (set of str): Set of articles to summarize.
         max_length (int): Maximum length of the summary.
         min_length (int): Minimum length of the summary.
 
