@@ -17,7 +17,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5  # Set up the Python environment
         with:
-          python-version: '3.x'  # Use Python 3.x (you can specify a version like '3.8')
+          python-version: '3.12'  # Use Python 3.x (you can specify a version like '3.8')
 
       - name: Install dependencies
         run: |
