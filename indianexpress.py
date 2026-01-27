@@ -55,6 +55,9 @@ def summarize_articles(articles, max_length=130, min_length=30):
 
             # Decode the generated summary
             summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
+            if "summarize:" in summary or len(summary.split()) < 15:
+                print(f"Skipping article with insufficient content: {title}")
+                continue
             print(summary)
             # Append the summary to the list
             summaries.append([today,title,summary])
