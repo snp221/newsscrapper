@@ -8,14 +8,10 @@ articles = []
 response = requests.get(url, headers=headers)
 soup = BeautifulSoup(response.content, 'html.parser')
 divs = soup.find_all('div', class_='today-paper')
-for div in divs:
-  li_elements = div.find_all('li')
-  for li in li_elements:
-    a_tag = li.find('a')
-    strong = li.find('strong')
-    if a_tag and 'href' in a_tag.attrs:
-      href = a_tag['href']
-      articles.append(href)
+for link in soup.find_all('a', href=True):
+    href = link['href']
+    if '/article/' in href:
+        articles.append(href)
 
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
