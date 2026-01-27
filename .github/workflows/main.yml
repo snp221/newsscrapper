@@ -28,5 +28,10 @@ jobs:
         env:
           gsheet: ${{ secrets.gsheet }}
 
+      - name: Verify credentials file
+        run: |
+          ls -la credentials.json
+          echo "Credentials file created successfully"
+
       - name: Run Python script
         run: python indianexpress.py  # Replace 'example.py' with your script name
